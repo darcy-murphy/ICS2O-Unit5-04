@@ -1,43 +1,37 @@
 
 
-// Copyright (c) 2020 Mr. Coxall All rights reserved
+// Copyright (c) 2022 Darcy Murphy All rights reserved
 //
 // Created by: Darcy Murphy
 // Created on: Nov 2022
 // This file contains the JS functions for index.html
 
-/**
- * Check servie worker.
- */
- if (navigator.serviceWorker) {
-  navigator.serviceWorker.register(
-    "/ICS2O-Unit5-01/sw.js",
-    {
-      scope:"/ICS2O-Unit5-01/",
-    }
-  )
-}
+
+"use strict"
 
 /**
- * This function displays the slider value.
+ * Check service worker.
  */
-function myButtonClicked() {
-  document.getElementById("slider-value").innerHTML =
-    "<p>Value is: " + slider.value + "</p>"
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register("/ICS2O-Unit5-04/sw.js", {
+    scope: "/ICS2O-Unit5-04/",
+  })
 }
 
-const randomNumber = Math.floor(Math.random() * 6) + 1
-
-/** 
- * This function updates the slider value.
- */
 function updateSliderValue(valueFromSlider) {
-  document.getElementById("slider-value").innerHTML = valueFromSlider
-  document.getElementById("answer").innerHTML =
-    "The answer was, " + randomNumber + "!" + " You got it! Good job."
-  
-    // block of code to be executed if conditional is true
-  if (valueFromSlider != randomNumber) 
-    document.getElementById("answer").innerHTML = 
-    "The answer was, " + randomNumber + " !" + " Nice guess, but try again."
+  document.getElementById("slider-value").innerHTML =
+    "Your age: " + valueFromSlider
+}
+
+function myButtonClicked() {
+  const day = document.getElementById("day").value
+  const age = document.getElementById("slider-value").value
+
+  if ((day == "tuesday" || day == "thursday") || (age > "12" || age < "25")) {
+    document.getElementById("price").innerHTML =
+      "You're eligible for student pricing."
+  } else {
+    document.getElementById("price").innerHTML =
+      "You're not eligible for student pricing."
   }
+}
